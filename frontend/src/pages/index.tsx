@@ -1,14 +1,16 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-
+import { Appbar } from '@/components/Appbar'
+import { Grid } from '@mui/material'
+import Layout from '@/components/layouts/layout'
+import NestedLayout from '../components/layouts/nested-layout'
+import HomeComponent from '@/components/HomeComponent'
 const inter = Inter({ subsets: ['latin'] })
+
 
 export default function Home() {
   return (
-    <>
-    Hello world
-    </>
+    <div>
+        <HomeComponent/>
+    </div>
   )
 }
