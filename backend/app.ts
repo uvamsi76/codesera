@@ -14,15 +14,16 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use(express.json());
 
-app.use("/admin",adminrouter)
-app.use("/users",userrouter)
+console.log("test app.ts")
+app.use("/api/admin",adminrouter)
+app.use("/api",userrouter)
 app.use(commonrouter)
 // Connect to MongoDB
 // DONT MISUSE THIS THANKYOU!!
 mongoose.connect('mongodb+srv://uvamsi76:ybjSWKpCunZoIvwY@cluster0.vtksuht.mongodb.net/codes-era', { dbName: "codes-era" });
 
 app.get('/',(req,res)=>{
-  res.json("working fine mowa 9")
+  res.json("working fine mowa ")
 })
 
-app.listen(3000, () => console.log('Server running on port 3000 ok'));  
+app.listen(3000, () => console.log('Server running on port 3000 ok'));

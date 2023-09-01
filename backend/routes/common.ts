@@ -12,13 +12,12 @@ const  commonrouter=express.Router();
  commonrouter.use(express.json());
 
 
- commonrouter.get('/courses', async (req, res) => {
-    const courses = await Course.find({});
-    res.json({ courses });
-  });
+commonrouter.get('/courses', async (req, res) => {
+   const courses = await Course.find({});
+   res.json({ courses });
+});
 commonrouter.get('/courses/:courseid',async(req:Request,res:Response) =>{
   const course=await Course.findById(req.params.courseid)
   res.status(200).json(course)
 })
-
-  export default commonrouter;
+export default commonrouter;

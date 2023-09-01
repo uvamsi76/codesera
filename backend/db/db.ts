@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { boolean, number } from "zod";
 
 
 enum countryEnum {
@@ -35,7 +36,10 @@ const userSchema = new mongoose.Schema({
     purchasedCourses:[{
       courseId:{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' },//"_cid",
       active: {type:Boolean},//false,
-      isCompleted:{type:Boolean}}],//false
+      isCompleted:{type:Boolean},
+      status:{type:Number}
+    }],//false
+      
     admin:{
       isAdmin:{type:Boolean},//true,
       adminId:{ type: mongoose.Schema.Types.ObjectId, ref: 'Admin' },//"_aid"
@@ -49,6 +53,7 @@ const adminSchema = new mongoose.Schema({
     // publishedCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
   userId:{type:mongoose.Schema.Types.ObjectId ,ref:"User"},
   username:{type:String},
+  email:{type:String},
   publishedCourses:[{ 
     courseId:{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' },//"_cid",//false,
     isCompleted:{type:Boolean} }],//["_cid"],
@@ -80,6 +85,7 @@ const courseSchema = new mongoose.Schema({
     no_of_students:{type:Number},//20,
     outcomes:[{type:String}],//"you will be able to..."
     prerequisites:[{type:String}],
+    ispublished:{type:Boolean},
     courseContent:{
       no_of_sections:{type:Number},//1,
       sections:[{
