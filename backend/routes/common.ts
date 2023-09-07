@@ -14,6 +14,7 @@ const  commonrouter=express.Router();
 
 commonrouter.get('/courses', async (req, res) => {
    const courses = await Course.find({});
+   console.log(courses)
    res.json({ courses });
 });
 commonrouter.get('/courses/:courseid',async(req:Request,res:Response) =>{

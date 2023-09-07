@@ -10,6 +10,7 @@ import {userSchema , userloginSchema} from "../zodschemas/userschema"
 
 //signup function
 export const handlesignup=async (req, res) => {
+    console.log("handlesignup")
     const { firstname,lastname, username, email, phoneno, password, country, dob, profilePic }= req.body;
     const purchasedCourses=[]
     const admin={
@@ -140,4 +141,4 @@ export const handlegetpurchasedcourse=async (req, res) => {
     } else {
       res.status(403).json({ message: 'User not found' });
     }
-  }
+  }   

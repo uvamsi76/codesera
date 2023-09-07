@@ -10,6 +10,7 @@ import {handlesignup ,handlelogin ,handlecourse,handlegetpurchasedcourse} from "
 
 const userrouter=express.Router();
 userrouter.use(express.json());
+userrouter.use(cors())
 
 
 // User routes
@@ -23,7 +24,7 @@ userrouter.post('/login', handlelogin);
   //   res.json({ courses });
   // });
 // buy course route
-userrouter.post('/courses/:courseId', authenticateJwt,handlecourse);
+userrouter.post('/purchasecourses/:courseId', authenticateJwt,handlecourse);
   
 userrouter.get('/purchasedCourses', authenticateJwt, handlegetpurchasedcourse);
 

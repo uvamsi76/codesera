@@ -15,9 +15,9 @@ app.use(cors())
 app.use(express.json());
 
 console.log("test app.ts")
+app.use("/api",commonrouter)
 app.use("/api/admin",adminrouter)
 app.use("/api",userrouter)
-app.use(commonrouter)
 // Connect to MongoDB
 // DONT MISUSE THIS THANKYOU!!
 mongoose.connect('mongodb+srv://uvamsi76:ybjSWKpCunZoIvwY@cluster0.vtksuht.mongodb.net/codes-era', { dbName: "codes-era" });
