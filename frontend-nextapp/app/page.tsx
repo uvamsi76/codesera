@@ -24,13 +24,6 @@ const inter = Inter({ subsets: ['latin'] })
 // }
 
 export default async function  Home() {
-  enum categoryEnum{
-    ArtificialIntelligence="ArtificialIntelligence",
-    WebDevelopment = "WebDevelopment",
-    AndroidDevelopment = "AndroidDevelopment",
-    DevOps="DevOps",
-    DataScience="DataScience"
-  }
   // const [courses,setCourses]=useRecoilState(coursesatom)
   // useEffect(()=>{
   //   fetch(ec2+`/courses`, {
@@ -43,46 +36,9 @@ export default async function  Home() {
   //         console.log(data.purchasedCourses)
   //     })
   // })})
-  // const res = await fetch(ec2+`/courses`)
-  // const crs = await res.json()
-  // const courses:CourseType[]=crs.courses
-  const courses:CourseType[]=[{
-    _id:"609c080b0f50b509b4e19016",
-    title: "Deep Learning A-Z™ 2023: Neural Networks, AI & ChatGPT Bonus",
-    description: "Learn to create Deep Learning Algorithms in Python from two Machine Learning & Data Science experts. Templates included.",
-    price: 5000,
-    thumbnail: "https://static-cse.canva.com/blob/1130149/1600w-wK95f3XNRaM.jpg",
-    category: categoryEnum.ArtificialIntelligence,
-    authors: ["uchintu76@gmail.com"],
-    outcomes: ["you will be able to..."],
-    prerequisites: ["sould know programming"],
-    ispublished: true,
-    rating: 4.5,
-    no_of_students: 20,
-    courseContent: {
-        no_of_sections: 1,
-        sections: [{
-            sectionTitle: "Introduction",
-            sectionDuration: "2h:45m",
-            noofsubtopics: 2,
-            subtopics: [
-                {
-                    subTopicTitle: "Welcome to course",
-                    subTopicDescription: "welcoming to course",
-                    subTopicDuration: "0h:10m",
-                    subTopicResourse: "https://youtu.be/AwQHqWyHRpU?si=xgS-esX48Xn2wR2s"
-                },
-                {
-                    subTopicTitle: "How to use course",
-                    subTopicDescription: "advice on course",
-                    subTopicDuration: "0h:10m",
-                    subTopicResourse: "https://youtu.be/AwQHqWyHRpU?si=xgS-esX48Xn2wR2s"
-                }
-            ]
-        }]
-    }
-}]
-  console.log("token here: "+getCookie('token'))
+  const res = await fetch(ec2+`/courses`)
+  const crs = await res.json()
+  const courses:CourseType[]=crs.courses
   return (
       <div>
           <HomeComponent courses={courses}/>

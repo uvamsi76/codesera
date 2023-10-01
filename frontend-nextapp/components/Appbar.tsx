@@ -1,22 +1,19 @@
+"use client"
+
 import { courseralogo, logo } from "@/util/env";
 import { Button, Grid, Typography } from "@mui/material";
 import { Url } from "next/dist/shared/lib/router/router";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { RecoilRoot, useRecoilValue } from "recoil";
 import { isSignedin } from "@/recoiatoms/issignin";
-// import Cookies from 'js-cookie';
-// import { cookies } from 'next/headers'
+import { getCookie } from "@/util/cookies";
+import { cookies } from 'next/headers'
 import Issignedin from "./appbarcomponents/Issignedin";
 import Logo from "./appbarcomponents/Appbarlogo";
 
 
 export  function Appbar(){
-    // const issignedin =Cookies.get("token")
-    const issignedin="wiefa"
-
-    // const issignedinvalue = getCookie('token')
-    console.log(issignedin)
 
     const center ={display:"flex", justifyContent:"center"}
     const appbarstyle={backgroundColor:"#f5f5f5",border:"1px solid rgba(233, 242, 255,1)",paddingTop:"0.5%",paddingBottom:"0.5%"}
@@ -29,7 +26,9 @@ export  function Appbar(){
             <Typography >Codes-Era</Typography>
         </Grid>
         <Grid item lg={4} style={{display:"flex",justifyContent:"right"}}>
-            <Issignedin issignedin={issignedin}/>
+            <RecoilRoot>
+                <Issignedin/>
+            </RecoilRoot>
         </Grid>
     </Grid>
     )

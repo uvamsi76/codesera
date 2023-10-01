@@ -2,9 +2,44 @@
 import { Button, Typography } from '@mui/material'
 import { cookies } from 'next/headers';
 import { useRouter } from 'next/navigation';
-import React from 'react'
+import {isSignedin} from '@/recoiatoms/issignin'
+import React, { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil';
+import Cookies from 'js-cookie';
+import Popup from '../popupcomponents/Popup';
 
-export const Issignedin = ({issignedin}:any) => {
+
+export const Issignedin = () => {
+    function handlelogout(){
+        const cookies = Object.keys(Cookies.get());
+        cookies.forEach(cookieName => {
+        Cookies.remove(cookieName);
+        });
+        console.log("done")
+        closePopup()
+        nav('/')
+
+    }
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const openPopup = () => {
+        setIsPopupOpen(true);
+      };
+    
+      const closePopup = () => {
+        setIsPopupOpen(false);
+      };
+    // const [IsSignedin,setIssignedin]=useRecoilState(isSignedin)
+    const [issignedin,setissignedin]=useState(false);
+    useEffect(()=>{
+        const IsSignedin=Cookies.get("token")
+        if(IsSignedin)setissignedin(true)
+        else setissignedin(false)
+        console.log(IsSignedin)
+    },[])
+    console.log(issignedin)
+    // const issignedin =cookies().get("token")
+    // console.log(issignedin)
+
     const router = useRouter();
     const nav = (page: string) => {router.push(page);};
     var p3 =(
@@ -23,7 +58,17 @@ export const Issignedin = ({issignedin}:any) => {
     )
     if(issignedin){
         p3=(<div>
-            <Typography>Dynamic content</Typography>
+            <Button style={{display:"flex",margin:10}} variant="contained" onClick={openPopup}>Logout</Button>
+            <Popup isOpen={isPopupOpen} onClose={closePopup}>
+                <h2>Are you sure</h2>
+                <div style={{display:"flex",margin:10}}>
+                <Button style={{display:"flex",margin:10}} variant="contained" onClick={()=>{closePopup
+                    nav('/signin')
+                }}>No</Button>
+                <Button style={{display:"flex",margin:10}} variant="contained" onClick={()=>{handlelogout()
+                }}>Yes</Button>
+                </div>
+            </Popup>
         </div>)
     }
   return (

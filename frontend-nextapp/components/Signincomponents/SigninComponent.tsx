@@ -1,21 +1,21 @@
 "use client"
 import { Button, Card, Grid, TextField, Typography } from "@mui/material"
 import { Url } from "next/dist/shared/lib/router/router";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react"
 import { ec2 } from "@/util/env";
-import {setCookie} from "../util/cookies"
-import { useRecoilState } from "recoil";
-import {isSignedin} from "../recoiatoms/issignin"
+import {getCookie, setCookie} from "../../util/cookies"
+import { RecoilRoot, useRecoilState } from "recoil";
+import {isSignedin} from "../../recoiatoms/issignin"
 export default function SigninComponent(){
     const router = useRouter();
-    const nav = (page: Url) => {
+    const nav = (page: string) => {
       router.push(page);
     };
     const center ={display:"flex", justifyContent:"center"}
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
-    const [issignedin,setIssignedin]=useRecoilState(isSignedin)
+    const [isi,setIsi]=useRecoilState(isSignedin)
 
     const handleSignin=async () => {
         const response = await fetch(ec2+'/login', {
@@ -24,10 +24,11 @@ export default function SigninComponent(){
             body: JSON.stringify({ email, password })
         });
         const data=await response.json()
-        console.log(data)
 
         const isadmin= String(data.role == "admin")
-        setIssignedin(true)
+        await setIsi(true)
+        console.log("token here: "+getCookie('token'))
+        console.log("issignedin"+isi)
         localStorage.setItem("token", data.token)
         localStorage.setItem("isadmin",isadmin)
         localStorage.setItem("email", data.email)
@@ -40,6 +41,9 @@ export default function SigninComponent(){
         setCookie("email", data.email,{
             maxAge: 3600, // Expires in 1 hour (in seconds)
           })
+        setCookie("issignedin", "true",{
+            maxAge: 3600, // Expires in 1 hour (in seconds)
+        })
         nav("/")
     }
 
